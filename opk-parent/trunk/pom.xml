@@ -13,6 +13,11 @@
 	<description>Parent POM for all projects with group ID net.sf.opk.</description>
 	<url>http://opk.sf.net/${project.artifactId}/</url>
 	<inceptionYear>2011</inceptionYear>
+	<scm>
+		<url>http://svn.code.sf.net/p/opk/code/opk-parent/trunk/</url>
+		<connection>scm:svn:svn://svn.code.sf.net/p/opk/code/opk-parent/trunk/</connection>
+		<developerConnection>scm:svn:https://svn.code.sf.net/p/opk/code/opk-parent/trunk/</developerConnection>
+	</scm>
 	<licenses>
 		<license>
 			<name>Apache 2</name>
@@ -25,10 +30,8 @@
 		<developer>
 			<id>opwvhk</id>
 			<name>Oscar Westra van Holthe - Kind</name>
-			<!--<email>oscar@westravanholthe.nl</email>-->
-			<url>http://oscar.westravanholthe.nl</url>
-			<!--<organization>foo</organization>-->
-			<!--<organizationUrl>http://oscar.westravanholthe.nl</organizationUrl>-->
+			<email>oscar@westravanholthe.nl</email>
+			<url>http://oscar.westravanholthe.nl/</url>
 			<roles>
 				<role>architect</role>
 				<role>developer</role>
@@ -41,11 +44,6 @@
 		<name>Oscar Westra van Holthe - Kind</name>
 		<url>http://oscar.westravanholthe.nl/</url>
 	</organization>
-	<scm>
-		<url>http://svn.code.sf.net/p/opk/code/opk-parent/trunk/</url>
-		<connection>scm:svn:svn://svn.code.sf.net/p/opk/code/opk-parent/trunk/</connection>
-		<developerConnection>scm:svn:https://svn.code.sf.net/p/opk/code/opk-parent/trunk/</developerConnection>
-	</scm>
 	<distributionManagement>
 		<site>
 			<id>opk.sf.net</id>
@@ -70,9 +68,9 @@
 						<reports>
 							<!-- Note: do not omit the index report unless you're creating an index.html elsewhere. -->
 							<report>index</report>
-							<report>project-team</report>
-							<report>license</report>
 							<report>modules</report>
+							<report>license</report>
+							<report>scm</report>
 						</reports>
 					</reportSet>
 				</reportSets>
@@ -160,6 +158,19 @@
 				</plugin>
 			</plugins>
 		</pluginManagement>
+		<plugins>
+			<plugin>
+				<artifactId>maven-site-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>attach-descriptor</id>
+						<goals>
+							<goal>attach-descriptor</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
 		<extensions>
 			<!-- For URLs, add SSH / SCP / SFTP support -->
 			<extension>
@@ -167,17 +178,20 @@
 				<artifactId>wagon-ssh</artifactId>
 				<version>2.2</version>
 			</extension>
-			<!-- For URL's, add GIT (SCM) support -->
-			<extension>
-				<groupId>org.apache.maven.wagon</groupId>
-				<artifactId>wagon-scm</artifactId>
-				<version>2.2</version>
-			</extension>
-			<extension>
-				<groupId>org.apache.maven.scm</groupId>
-				<artifactId>maven-scm-provider-gitexe</artifactId>
-				<version>1.6</version>
-			</extension>
 		</extensions>
 	</build>
+	<profiles>
+		<profile>
+			<id>disable-test-report-for-parent-pom</id>
+			<!-- Unlike the other reports, the surefire report does not skip itself if there is nothing to report. -->
+			<activation>
+				<file>
+					<missing>${project.basedir}/src/test/java</missing>
+				</file>
+			</activation>
+			<properties>
+				<skipSurefireReport>true</skipSurefireReport>
+			</properties>
+		</profile>
+	</profiles>
 </project>
