@@ -2,9 +2,9 @@
 <project xmlns="http://maven.apache.org/DECORATION/1.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/DECORATION/1.1.0 http://maven.apache.org/xsd/decoration-1.1.0.xsd">
 	<skin>
-		<groupId>org.apache.maven.skins</groupId>
-		<artifactId>maven-fluido-skin</artifactId>
-		<version>1.0</version>
+		<groupId>com.googlecode.fluido-skin</groupId>
+		<artifactId>fluido-skin</artifactId>
+		<version>1.3</version>
 	</skin>
 	<custom>
         <fluidoSkin>
@@ -22,28 +22,25 @@
 	 ~ navigation-bottom Bottom of the menu
 	 ~ none              Suppress the item
 	-->
-	<version position="left"/>
-	<publishDate position="navigation-bottom" format="yyyy-MM-dd"/>
+	<version position="right"/>
+	<publishDate position="right" format="yyyy-MM-dd"/>
 	<bannerLeft>
 		<name>${project.name}</name>
 		<src>./images/project_logo.png</src>
 		<href>${project.url}</href>
 	</bannerLeft>
 	<bannerRight>
-		<src>./images/author_coatofarms.png</src>
+		<src>${project.url}/../opk-parent/images/author_coatofarms.png</src>
 		<href>http://oscar.westravanholthe.nl/</href>
 		<alt>Author: Oscar Westra van Holthe - Kind</alt>
 	</bannerRight>
 	<body>
-		<links>
-			<item name="Maven" href="http://maven.apache.org/"/>
-		</links>
 		<breadcrumbs>
-			<!--<item name="OPK Development" href="http://opk.sf.net/"/>-->
+			<item name="OPK Development" href="http://opk.sf.net/"/>
 		</breadcrumbs>
 		<!-- When building the site, this will become a menu with all modules (if available). -->
-		<menu ref="modules"/>
+		<menu ref="modules" inherit="bottom"/>
 		<!-- When building the site, this will become a menu with all reports (if available). -->
-		<menu ref="reports"/>
+		<menu ref="reports" inherit="bottom"/>
 	</body>
 </project>
