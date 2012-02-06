@@ -30,14 +30,24 @@
 		<href>${project.url}</href>
 	</bannerLeft>
 	<bannerRight>
-		<src>${project.url}/../opk-parent/images/author_coatofarms.png</src>
-		<href>http://oscar.westravanholthe.nl/</href>
-		<alt>Author: Oscar Westra van Holthe - Kind</alt>
+		<src>./images/logo.png</src>
+		<href>http://opk.sf.net/</href>
+		<alt>OPK Development</alt>
 	</bannerRight>
+	<poweredBy/>
 	<body>
 		<breadcrumbs>
 			<item name="OPK Development" href="http://opk.sf.net/"/>
 		</breadcrumbs>
+		<menu name="Overview">
+			<item name="Introduction" href="index.html"/>
+			<item name="Instant Developer Experience" href="instant_developer_experience.html"/>
+		</menu>
+		<menu name="Projects">
+			<item name="Embedded GlassFish Web Plugin" href="embedded-glassfish-web-plugin/"/>
+			<item name="JDBC Populator" href="jdbc-populator/"/>
+			<item name="Parent POM" href="opk-parent.html"/>
+		</menu>
 		<!-- When building the site, this will become a menu with all modules (if available). -->
 		<menu ref="modules" inherit="bottom"/>
 		<!-- When building the site, this will become a menu with all reports (if available). -->
