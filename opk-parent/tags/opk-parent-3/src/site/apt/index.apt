@@ -1,0 +1,24 @@
+	---
+	Introduction
+	---
+	Oscar Westra van Holthe - Kind
+	---
+	2012-02-06
+	---
+
+OPK Development
+
+  This is a website where I present several Open Source projects:
+  
+  [{{{embedded-glassfish-web-plugin/}Embedded Glassfish Web Plugin}}] A Maven plugin that allows you to create an
+  {{{./instant_developer_experience.html}Instant Developer Experience}}, by running your web application in an embedded
+  GlassFish container.
+
+  [{{{jdbc-populator/}JDBC Populator}}] A Web Fragment that simulates the Hibernate feature of importing a resource
+  named <<<import.sql>>> into a database.
+
+
+  [{{{opk-parent/}Parent POM}}] Parent POM for all projects.
+
+  []
+
