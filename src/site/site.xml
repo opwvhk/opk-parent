@@ -30,7 +30,7 @@
 		<href>${project.url}</href>
 	</bannerLeft>
 	<bannerRight>
-		<src>./images/logo.png</src>
+		<src>${project.url}/images/logo.png</src>
 		<href>http://opk.sf.net/</href>
 		<alt>OPK Development</alt>
 	</bannerRight>
