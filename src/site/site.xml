@@ -30,11 +30,14 @@
 		<href>${project.url}</href>
 	</bannerLeft>
 	<bannerRight>
-		<src>${project.url}/images/logo.png</src>
+		<src>http://opk.sf.net/images/logo.png</src>
 		<href>http://opk.sf.net/</href>
 		<alt>OPK Development</alt>
 	</bannerRight>
-	<poweredBy/>
+	<poweredBy>
+		<logo name="Created by Oscar Westra van Holthe - Kind" href="http://oscar.westravanholthe.nl/"
+		      img="./images/created_by_OscarWvHK.png" position="left"/>
+	</poweredBy>
 	<body>
 		<breadcrumbs>
 			<item name="OPK Development" href="http://opk.sf.net/"/>
