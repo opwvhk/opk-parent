@@ -184,19 +184,5 @@
 				<skipSurefireReport>true</skipSurefireReport>
 			</properties>
 		</profile>
-		<profile>
-			<id>parent-site-as-sibling</id>
-			<activation>
-				<file>
-					<exists>README_parentPom.txt</exists>
-				</file>
-			</activation>
-			<distributionManagement>
-				<site>
-					<id>opk.sf.net</id>
-					<url>scp://shell.sourceforge.net/home/project-web/opk/htdocs/opk-parent</url>
-				</site>
-			</distributionManagement>
-		</profile>
 	</profiles>
 </project>
