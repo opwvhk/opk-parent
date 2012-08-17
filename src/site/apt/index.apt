@@ -14,8 +14,8 @@ OPK Development
   {{{./instant_developer_experience.html}Instant Developer Experience}}, by running your web application in an embedded
   GlassFish container.
 
-  [{{{./jdbc-populator/}JDBC Populator}}] A Web Fragment that simulates the Hibernate feature of importing a resource
-  named <<<import.sql>>> into a database.
+  [{{{./jdbc-populator/}JDBC Populator}}] A JDBC data source implementation that populates the database before its
+  first use.
 
 
   [{{{./opk-parent.html}Parent POM}}] Parent POM for all projects.
