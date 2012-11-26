@@ -13,8 +13,7 @@
   ~ implied. See the License for the specific language governing permissions and limitations under the
   ~ License.
   -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.sonatype.oss</groupId>
@@ -23,16 +22,16 @@
 	</parent>
 	<groupId>net.sf.opk</groupId>
 	<artifactId>opk-parent</artifactId>
-	<version>4-SNAPSHOT</version>
+	<version>4</version>
 	<packaging>pom</packaging>
 	<name>Parent POM</name>
 	<description>Parent POM for all projects with group ID net.sf.opk.</description>
 	<url>http://opk.sf.net/${project.artifactId}/</url>
 	<inceptionYear>2011</inceptionYear>
 	<scm>
-		<url>http://svn.code.sf.net/p/opk/code/opk-parent/trunk/</url>
-		<connection>scm:svn:svn://svn.code.sf.net/p/opk/code/opk-parent/trunk/</connection>
-		<developerConnection>scm:svn:https://svn.code.sf.net/p/opk/code/opk-parent/trunk/</developerConnection>
+		<url>http://svn.code.sf.net/p/opk/code/opk-parent/tags/opk-parent-4</url>
+		<connection>scm:svn:svn://svn.code.sf.net/p/opk/code/opk-parent/tags/opk-parent-4</connection>
+		<developerConnection>scm:svn:https://svn.code.sf.net/p/opk/code/opk-parent/tags/opk-parent-4</developerConnection>
 	</scm>
 	<licenses>
 		<license>
