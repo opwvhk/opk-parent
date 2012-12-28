@@ -58,6 +58,7 @@
 			<item name="FAQ" href="faq.html"/>
 		</menu>
 		<menu name="Projects">
+			<item name="REST Pages" href="rest-pages/"/>
 			<item name="Embedded GlassFish Web Plugin" href="embedded-glassfish-web-plugin/"/>
 			<item name="JDBC Populator" href="jdbc-populator/"/>
 			<item name="Parent POM" href="opk-parent.html"/>
