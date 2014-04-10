@@ -22,16 +22,16 @@
 	</parent>
 	<groupId>net.sf.opk</groupId>
 	<artifactId>opk-parent</artifactId>
-	<version>5</version>
+	<version>6-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>Parent POM</name>
 	<description>Parent POM for all projects with group ID net.sf.opk.</description>
 	<url>http://opk.sf.net/${project.artifactId}/</url>
 	<inceptionYear>2011</inceptionYear>
 	<scm>
-		<url>http://svn.code.sf.net/p/opk/code/opk-parent/tags/opk-parent-5</url>
-		<connection>scm:svn:svn://svn.code.sf.net/p/opk/code/opk-parent/tags/opk-parent-5</connection>
-		<developerConnection>scm:svn:https://svn.code.sf.net/p/opk/code/opk-parent/tags/opk-parent-5</developerConnection>
+		<url>http://svn.code.sf.net/p/opk/code/opk-parent/trunk/</url>
+		<connection>scm:svn:svn://svn.code.sf.net/p/opk/code/opk-parent/trunk/</connection>
+		<developerConnection>scm:svn:https://svn.code.sf.net/p/opk/code/opk-parent/trunk/</developerConnection>
 	</scm>
 	<licenses>
 		<license>
