@@ -1,5 +1,5 @@
 <!--
-  ~ Copyright 2012-2014 Oscar Westra van Holthe - Kind
+  ~ Copyright 2012-2019 Oscar Westra van Holthe - Kind
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in
   ~ compliance with the License.
@@ -68,7 +68,11 @@
 	</distributionManagement>
 	<properties>
 		<!-- Build configurations -->
-		<jdk.version>1.7</jdk.version>
+		<jdk.version>1.8</jdk.version>
+		<maven.compiler.source>${jdk.version}</maven.compiler.source>
+		<maven.compiler.testSource>${jdk.version}</maven.compiler.testSource>
+		<maven.compiler.target>${jdk.version}</maven.compiler.target>
+		<maven.compiler.testTarget>${jdk.version}</maven.compiler.testTarget>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
@@ -77,7 +81,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-project-info-reports-plugin</artifactId>
-				<version>2.7</version>
+				<version>3.0.0</version>
 				<reportSets>
 					<reportSet>
 						<reports>
@@ -93,12 +97,12 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-report-plugin</artifactId>
-				<version>2.16</version>
+				<version>2.22.1</version>
 			</plugin>
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.6.3.201306030806</version>
+				<version>0.8.3</version>
 				<reportSets>
 					<reportSet>
 						<reports>
@@ -110,7 +114,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.9.1</version>
+				<version>3.0.1</version>
 				<reportSets>
 					<reportSet>
 						<reports>
@@ -125,32 +129,13 @@
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.1</version>
-				<configuration>
-					<compilerVersion>${jdk.version}</compilerVersion>
-					<source>${jdk.version}</source>
-					<target>${jdk.version}</target>
-					<encoding>${project.build.sourceEncoding}</encoding>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-resources-plugin</artifactId>
-				<version>2.6</version>
-				<configuration>
-					<encoding>${project.build.sourceEncoding}</encoding>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-report-plugin</artifactId>
-				<version>2.16</version>
+				<version>2.22.1</version>
 			</plugin>
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.6.3.201306030806</version>
+				<version>0.8.3</version>
 				<executions>
 					<execution>
 						<goals>
@@ -172,17 +157,17 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-release-plugin</artifactId>
-				<version>2.4.2</version>
+				<version>2.5.3</version>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-site-plugin</artifactId>
-				<version>3.3</version>
+				<version>3.7.1</version>
 				<dependencies>
 					<dependency>
 						<groupId>org.apache.maven.doxia</groupId>
 						<artifactId>doxia-module-markdown</artifactId>
-						<version>1.5</version>
+						<version>1.8</version>
 					</dependency>
 				</dependencies>
 				<executions>
@@ -193,18 +178,6 @@
 						</goals>
 					</execution>
 				</executions>
-				<configuration>
-					<inputEncoding>${project.build.sourceEncoding}</inputEncoding>
-					<outputEncoding>${project.reporting.outputEncoding}</outputEncoding>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.9.1</version>
-				<configuration>
-					<show>protected</show>
-				</configuration>
 			</plugin>
 		</plugins>
 		<extensions>
@@ -212,7 +185,7 @@
 			<extension>
 				<groupId>org.apache.maven.wagon</groupId>
 				<artifactId>wagon-ssh</artifactId>
-				<version>2.5</version>
+				<version>3.3.2</version>
 			</extension>
 		</extensions>
 	</build>
