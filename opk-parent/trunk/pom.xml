@@ -70,7 +70,7 @@
 		<site>
 			<id>opk.sf.net</id>
 			<name>Project website at SourceForge</name>
-			<url>scp://shell.sourceforge.net/home/project-web/opk/htdocs</url>
+			<url>scpexe://okind@shell.sourceforge.net/home/project-web/opk/htdocs</url>
 		</site>
 	</distributionManagement>
 	<properties>
@@ -172,13 +172,16 @@
 						</goals>
 					</execution>
 				</executions>
+				<configuration>
+					<validate>true</validate>
+				</configuration>
 			</plugin>
 		</plugins>
 		<extensions>
 			<!-- For URLs, add SSH / SCP / SFTP support -->
 			<extension>
 				<groupId>org.apache.maven.wagon</groupId>
-				<artifactId>wagon-ssh</artifactId>
+				<artifactId>wagon-ssh-external</artifactId>
 				<version>3.3.2</version>
 			</extension>
 		</extensions>
@@ -195,7 +198,7 @@
 							<!-- Note: do not omit the index report unless you're creating an index.html elsewhere. -->
 							<report>index</report>
 							<report>modules</report>
-							<report>license</report>
+							<report>licenses</report>
 							<report>scm</report>
 						</reports>
 					</reportSet>
