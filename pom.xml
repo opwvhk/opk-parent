@@ -1,5 +1,5 @@
 <!--
-  ~ Copyright 2012-2019 Oscar Westra van Holthe - Kind
+  ~ Copyright 2012-2023 Oscar Westra van Holthe - Kind
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in
   ~ compliance with the License.
@@ -14,299 +14,274 @@
   ~ License.
   -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd"
+         child.project.url.inherit.append.path="false">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>net.sf.opk</groupId>
 	<artifactId>opk-parent</artifactId>
-	<version>6</version>
+	<version>7-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
-	<name>Parent POM</name>
-	<description>Parent POM for all projects with group ID net.sf.opk.</description>
-
-	<url>http://opk.sf.net/${project.artifactId}/</url>
+	<name>${project.artifactId}</name>
+	<description>${project.groupId}:${project.artifactId}</description>
+	<url>${project.organization.url}/${project.artifactId}/</url>
 	<inceptionYear>2011</inceptionYear>
-	<scm>
-		<url>http://svn.code.sf.net/p/opk/code/opk-parent/trunk/</url>
-		<connection>scm:svn:svn://svn.code.sf.net/p/opk/code/opk-parent/trunk/</connection>
-		<developerConnection>scm:svn:https://svn.code.sf.net/p/opk/code/opk-parent/trunk/</developerConnection>
+	<scm child.scm.connection.inherit.append.path="false" child.scm.developerConnection.inherit.append.path="false" child.scm.url.inherit.append.path="false">
+		<url>https://github.com/opwvhk/${project.artifactId}</url>
+		<developerConnection>scm:git:git@github.com:opwvhk/${project.artifactId}.git</developerConnection>
 	</scm>
 	<licenses>
 		<license>
-			<name>Apache 2</name>
-			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<name>Apache-2.0</name>
+			<url>https://opensource.org/license/apache-2-0/</url>
 			<distribution>repo</distribution>
-			<comments>A business-friendly OSS license</comments>
 		</license>
 	</licenses>
 	<developers>
 		<developer>
-			<id>opwvhk</id>
 			<name>Oscar Westra van Holthe - Kind</name>
-			<email>oscar@westravanholthe.nl</email>
-			<url>http://oscar.westravanholthe.nl/</url>
-			<roles>
-				<role>architect</role>
-				<role>developer</role>
-			</roles>
-			<timezone>1</timezone>
 		</developer>
 	</developers>
 	<organization>
 		<!-- Not really an organization, but the owner of the copyrights. -->
 		<name>Oscar Westra van Holthe - Kind</name>
-		<url>http://oscar.westravanholthe.nl/</url>
+		<url>https://github.com/opwvhk/</url>
 	</organization>
 	<distributionManagement>
 		<snapshotRepository>
-			<id>ossrh</id>
-			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+			<id>${nexusServerId}</id>
+			<url>${nexusUrl}content/repositories/snapshots</url>
 		</snapshotRepository>
-		<repository>
-			<id>ossrh</id>
-			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-		</repository>
-		<site>
-			<id>opk.sf.net</id>
-			<name>Project website at SourceForge</name>
-			<url>scpexe://okind@shell.sourceforge.net/home/project-web/opk/htdocs</url>
-		</site>
 	</distributionManagement>
 	<properties>
 		<!-- Build configurations -->
-		<targetJdkVersion>1.8</targetJdkVersion>
-		<defaultFileEncoding>UTF-8</defaultFileEncoding>
-		<maven.build.timestamp.format>yyyyMMdd.HHmmss</maven.build.timestamp.format>
-
-		<maven.compiler.source>${targetJdkVersion}</maven.compiler.source>
-		<maven.compiler.target>${targetJdkVersion}</maven.compiler.target>
-		<maven.compiler.testSource>${targetJdkVersion}</maven.compiler.testSource>
-		<maven.compiler.testTarget>${targetJdkVersion}</maven.compiler.testTarget>
-		<project.build.sourceEncoding>${defaultFileEncoding}</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>${defaultFileEncoding}</project.reporting.outputEncoding>
+		<maven.compiler.release>17</maven.compiler.release>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
+		<!-- Plugin versions -->
+		<maven-enforcer-plugin.version>3.3.0</maven-enforcer-plugin.version>
+		<maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
+		<maven-source-plugin.version>3.2.1</maven-source-plugin.version>
+		<maven-javadoc-plugin.version>3.5.0</maven-javadoc-plugin.version>
+		<maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version>
+		<maven-install-plugin.version>3.1.1</maven-install-plugin.version>
+		<nexus-staging-maven-plugin.version>1.6.13</nexus-staging-maven-plugin.version>
+		<!-- Nexus configuration -->
+		<nexusServerId>ossrh</nexusServerId>
+		<nexusUrl>https://oss.sonatype.org/</nexusUrl>
+		<!--<nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>-->
 	</properties>
 	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-enforcer-plugin</artifactId>
+					<version>${maven-enforcer-plugin.version}</version>
+					<executions>
+						<execution>
+							<id>enforce-sonatype-oss-requirements</id>
+							<goals>
+								<goal>enforce</goal>
+							</goals>
+							<configuration>
+								<rules>
+									<requireMavenVersion>
+										<version>[3.5.4,)</version>
+										<message>You need a Maven version at most 5 years old</message>
+									</requireMavenVersion>
+									<requireJavaVersion>
+										<version>11</version>
+									</requireJavaVersion>
+									<requireReleaseDeps>
+										<message>Release versions do not allow snapshot dependencies; they must re reproducible.</message>
+										<onlyWhenRelease>true</onlyWhenRelease>
+									</requireReleaseDeps>
+									<requireUpperBoundDeps/>
+									<requireFilesExist>
+										<message>An OSS project requires a license</message>
+										<satisfyAny>true</satisfyAny>
+										<files>
+											<file>LICENSE</file>
+											<file>LICENSE.md</file>
+											<file>LICENSE.txt</file>
+										</files>
+									</requireFilesExist>
+									<requireProperty>
+										<property>project.groupId</property>
+									</requireProperty>
+									<requireProperty>
+										<property>project.distributionManagement.snapshotRepository.url</property>
+										<message>These requirements have been checked for Sonatype deployments only</message>
+										<regex>https://(s01\.)?oss\.sonatype\.org/content/repositories/snapshots</regex>
+									</requireProperty>
+									<requireProperty>
+										<property>project.artifactId</property>
+									</requireProperty>
+									<requireProperty>
+										<property>project.version</property>
+									</requireProperty>
+									<requireProperty>
+										<property>project.name</property>
+									</requireProperty>
+									<requireProperty>
+										<property>project.description</property>
+									</requireProperty>
+									<requireProperty>
+										<property>project.url</property>
+									</requireProperty>
+									<requireProperty>
+										<property>project.organization.name</property>
+									</requireProperty>
+									<requireProperty>
+										<property>project.inceptionYear</property>
+									</requireProperty>
+									<requireProperty>
+										<property>project.licenses[0].name</property>
+									</requireProperty>
+									<requireProperty>
+										<property>project.licenses[0].url</property>
+									</requireProperty>
+									<requireProperty>
+										<property>project.scm.developerConnection</property>
+									</requireProperty>
+								</rules>
+								<fail>true</fail>
+							</configuration>
+						</execution>
+						<execution>
+							<id>allow-deploy-only-for-release-versions</id>
+							<phase>deploy</phase>
+							<goals>
+								<goal>enforce</goal>
+							</goals>
+							<configuration>
+								<rules combine.self="override">
+									<requireReleaseVersion>
+										<message>Creating a release requires a release version (not a snapshot).</message>
+									</requireReleaseVersion>
+								</rules>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>${maven-compiler-plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-source-plugin</artifactId>
+					<version>${maven-source-plugin.version}</version>
+					<executions>
+						<execution>
+							<id>oss-required-sources</id>
+							<goals>
+								<goal>jar-no-fork</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-javadoc-plugin</artifactId>
+					<version>${maven-javadoc-plugin.version}</version>
+					<executions>
+						<execution>
+							<id>oss-required-javadocs</id>
+							<goals>
+								<goal>jar</goal>
+							</goals>
+						</execution>
+					</executions>
+					<configuration combine.children="append">
+						<doclint>all,-missing</doclint>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-gpg-plugin</artifactId>
+					<version>${maven-gpg-plugin.version}</version>
+					<executions>
+						<execution>
+							<id>sign-artifacts</id>
+							<phase>install</phase>
+							<goals>
+								<goal>sign</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-install-plugin</artifactId>
+					<version>${maven-install-plugin.version}</version>
+					<executions>
+						<!--
+						To ensure the gpg plugin runs first, we delete the default execution (that always executes first), and recreate it after the gpg plugin.
+						This ensures the new execution runs after the gpg plugin execution.
+
+						Can be verified using: mvn fr.jcgay.maven.plugins:buildplan-maven-plugin:list
+						-->
+						<execution>
+							<id>default-install</id>
+							<phase>none</phase>
+						</execution>
+						<execution>
+							<id>signed-install</id>
+							<goals>
+								<goal>install</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<groupId>org.sonatype.plugins</groupId>
+					<artifactId>nexus-staging-maven-plugin</artifactId>
+					<version>${nexus-staging-maven-plugin.version}</version>
+					<extensions>true</extensions>
+					<configuration combine.children="append">
+						<serverId>${nexusServerId}</serverId>
+						<nexusUrl>${nexusUrl}</nexusUrl>
+						<!--
+						The next property should be set to true (for fully automated releases) or false (so you can manually inspect the release).
+						If set to false, you can log in to the nexusUrl above, inspect the release, and then use 'mvn nexus-staging:release' or
+						'mvn nexus-staging:drop' afterward to proceed with or cancel the release.
+
+						The setup here is more in line with an old-fashioned 'mvn deploy', and requires less manual intervention.
+						-->
+						<autoReleaseAfterClose>false</autoReleaseAfterClose>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-enforcer-plugin</artifactId>
-				<version>3.0.0-M2</version>
-				<executions>
-					<execution>
-						<id>enforce-basics-and-sane-dependencies</id>
-						<goals>
-							<goal>enforce</goal>
-						</goals>
-						<configuration>
-							<rules>
-								<requireJavaVersion>
-									<version>[1.8,)</version>
-								</requireJavaVersion>
-								<requireMavenVersion>
-									<version>[3.0,)</version>
-								</requireMavenVersion>
-								<requireUpperBoundDeps/>
-							</rules>
-							<fail>true</fail>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-report-plugin</artifactId>
-				<version>2.22.1</version>
-			</plugin>
-			<plugin>
-				<groupId>org.jacoco</groupId>
-				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.8.3</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>prepare-agent</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>report</id>
-						<phase>post-integration-test</phase>
-						<goals>
-							<goal>report</goal>
-						</goals>
-						<configuration>
-							<outputDirectory>${project.build.directory}/jacoco</outputDirectory>
-						</configuration>
-					</execution>
-				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
-				<version>3.0.1</version>
-				<executions>
-					<execution>
-						<id>attach-sources</id>
-						<goals>
-							<goal>jar-no-fork</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-site-plugin</artifactId>
-				<version>3.7.1</version>
-				<dependencies>
-					<dependency>
-						<groupId>org.apache.maven.doxia</groupId>
-						<artifactId>doxia-module-markdown</artifactId>
-						<version>1.8</version>
-					</dependency>
-				</dependencies>
-				<executions>
-					<execution>
-						<id>attach-descriptor</id>
-						<goals>
-							<goal>attach-descriptor</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<validate>true</validate>
-				</configuration>
-			</plugin>
-		</plugins>
-		<extensions>
-			<!-- For URLs, add SSH / SCP / SFTP support -->
-			<extension>
-				<groupId>org.apache.maven.wagon</groupId>
-				<artifactId>wagon-ssh-external</artifactId>
-				<version>3.3.2</version>
-			</extension>
-		</extensions>
-	</build>
-	<reporting>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-project-info-reports-plugin</artifactId>
-				<version>3.0.0</version>
-				<reportSets>
-					<reportSet>
-						<reports>
-							<!-- Note: do not omit the index report unless you're creating an index.html elsewhere. -->
-							<report>index</report>
-							<report>modules</report>
-							<report>licenses</report>
-							<report>scm</report>
-						</reports>
-					</reportSet>
-				</reportSets>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-report-plugin</artifactId>
-				<version>2.22.1</version>
-			</plugin>
-			<plugin>
-				<groupId>org.jacoco</groupId>
-				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.8.3</version>
-				<reportSets>
-					<reportSet>
-						<reports>
-							<report>report</report>
-						</reports>
-					</reportSet>
-				</reportSets>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>3.0.1</version>
-				<reportSets>
-					<reportSet>
-						<reports>
-							<report>javadoc</report>
-						</reports>
-					</reportSet>
-				</reportSets>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-gpg-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-install-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.sonatype.plugins</groupId>
+				<artifactId>nexus-staging-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
-	</reporting>
-	<profiles>
-		<profile>
-			<id>release</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-enforcer-plugin</artifactId>
-						<version>3.0.0-M2</version>
-						<executions>
-							<execution>
-								<id>additionally-enforce-no-snapshots</id>
-								<goals>
-									<goal>enforce</goal>
-								</goals>
-								<configuration>
-									<rules>
-										<requireReleaseVersion/>
-										<requireReleaseDeps/>
-									</rules>
-									<fail>true</fail>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-gpg-plugin</artifactId>
-						<version>1.6</version>
-						<executions>
-							<execution>
-								<id>sign-artifacts</id>
-								<phase>verify</phase>
-								<goals>
-									<goal>sign</goal>
-								</goals>
-							</execution>
-						</executions>
-						<configuration>
-							<!-- Note: this configuration assumes you have and want to use your default GnuPG key -->
-							<gpgArguments>
-								<arg>--pinentry-mode</arg>
-								<arg>loopback</arg>
-							</gpgArguments>
-							<passphraseServerId>gpg.passphrase</passphraseServerId>
-						</configuration>
-					</plugin>
-					<plugin>
-						<groupId>org.sonatype.plugins</groupId>
-						<artifactId>nexus-staging-maven-plugin</artifactId>
-						<version>1.6.8</version>
-						<extensions>true</extensions>
-						<configuration>
-							<serverId>ossrh</serverId>
-							<nexusUrl>https://oss.sonatype.org/</nexusUrl>
-							<autoReleaseAfterClose>true</autoReleaseAfterClose>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-		<profile>
-			<id>disable-test-report-for-parent-pom</id>
-			<!-- Unlike the other reports, the surefire report does not skip itself if there is nothing to report. -->
-			<activation>
-				<file>
-					<missing>src/test/java</missing>
-				</file>
-			</activation>
-			<properties>
-				<skipSurefireReport>true</skipSurefireReport>
-			</properties>
-		</profile>
-	</profiles>
+	</build>
 </project>
