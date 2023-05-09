@@ -1,3 +1,6 @@
+[![license](doc/license-APACHE-2.0-brightgreen.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/net.sf.opk/opk-parent/badge.svg)](https://maven-badges.herokuapp.com/maven-central/net.sf.opk/opk-parent)
+
 OPK-Parent
 ==========
 
@@ -37,7 +40,7 @@ You'll need to [set up GnuPG](https://central.sonatype.org/publish/requirements/
 * have or generate a key pair, and
 * distribute your private key.
 
-Beware that if you have more than one private key, your indstallation needs to select the correct one *by default*.
+Beware that if you have more than one private key, your installation needs to select the correct one *by default*.
 
 Additionally, you'll need to configure Maven:
 
