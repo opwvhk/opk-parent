@@ -13,14 +13,12 @@
   ~ implied. See the License for the specific language governing permissions and limitations under the
   ~ License.
   -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd"
-         child.project.url.inherit.append.path="false">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd" child.project.url.inherit.append.path="false">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>net.sf.opk</groupId>
 	<artifactId>opk-parent</artifactId>
-	<version>7-SNAPSHOT</version>
+	<version>7</version>
 	<packaging>pom</packaging>
 
 	<name>${project.artifactId}</name>
@@ -30,7 +28,8 @@
 	<scm child.scm.connection.inherit.append.path="false" child.scm.developerConnection.inherit.append.path="false" child.scm.url.inherit.append.path="false">
 		<url>https://github.com/opwvhk/${project.artifactId}</url>
 		<developerConnection>scm:git:git@github.com:opwvhk/${project.artifactId}.git</developerConnection>
-	</scm>
+	  <tag>opk-parent-7</tag>
+  </scm>
 	<licenses>
 		<license>
 			<name>Apache-2.0</name>
@@ -98,7 +97,7 @@
 										<message>Release versions do not allow snapshot dependencies; they must re reproducible.</message>
 										<onlyWhenRelease>true</onlyWhenRelease>
 									</requireReleaseDeps>
-									<requireUpperBoundDeps/>
+									<requireUpperBoundDeps />
 									<requireFilesExist>
 										<message>An OSS project requires a license</message>
 										<satisfyAny>true</satisfyAny>
