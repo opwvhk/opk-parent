@@ -18,7 +18,7 @@
 
 	<groupId>net.sf.opk</groupId>
 	<artifactId>opk-parent</artifactId>
-	<version>7</version>
+	<version>8-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>${project.artifactId}</name>
@@ -28,7 +28,7 @@
 	<scm child.scm.connection.inherit.append.path="false" child.scm.developerConnection.inherit.append.path="false" child.scm.url.inherit.append.path="false">
 		<url>https://github.com/opwvhk/${project.artifactId}</url>
 		<developerConnection>scm:git:git@github.com:opwvhk/${project.artifactId}.git</developerConnection>
-	  <tag>opk-parent-7</tag>
+	  <tag>HEAD</tag>
   </scm>
 	<licenses>
 		<license>
