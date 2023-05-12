@@ -261,6 +261,7 @@
 					<configuration>
 						<scmDevelopmentCommitComment>Next development version</scmDevelopmentCommitComment>
 						<scmReleaseCommitComment>Release @{releaseLabel}</scmReleaseCommitComment>
+						<pushChanges>true</pushChanges>
 					</configuration>
 				</plugin>
 			</plugins>
