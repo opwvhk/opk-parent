@@ -70,6 +70,7 @@
 		<nexusServerId>ossrh</nexusServerId>
 		<nexusUrl>https://oss.sonatype.org/</nexusUrl>
 		<!--<nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>-->
+		<nexusAutoReleaseAfterClose>true</nexusAutoReleaseAfterClose>
 	</properties>
 	<build>
 		<pluginManagement>
@@ -244,14 +245,7 @@
 					<configuration combine.children="append">
 						<serverId>${nexusServerId}</serverId>
 						<nexusUrl>${nexusUrl}</nexusUrl>
-						<!--
-						The next property should be set to true (for fully automated releases) or false (so you can manually inspect the release).
-						If set to false, you can log in to the nexusUrl above, inspect the release, and then use 'mvn nexus-staging:release' or
-						'mvn nexus-staging:drop' afterward to proceed with or cancel the release.
-
-						The setup here is more in line with an old-fashioned 'mvn deploy', and requires less manual intervention.
-						-->
-						<autoReleaseAfterClose>false</autoReleaseAfterClose>
+						<autoReleaseAfterClose>${nexusAutoReleaseAfterClose}</autoReleaseAfterClose>
 					</configuration>
 				</plugin>
 				<plugin>
