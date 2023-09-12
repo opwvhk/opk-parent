@@ -107,4 +107,6 @@ To release, you'll need to ensure the following:
 * has a release version,
 * has no snapshot dependencies,
 * follows your own requirements as well
+  good requirements are that your working tree is clean and that you've tagged the current commit
 
+Then, releasing is as simple as running `mvn deploy`
