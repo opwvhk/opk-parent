@@ -43,7 +43,7 @@ You'll need to [set up GnuPG](https://central.sonatype.org/publish/requirements/
 * distribute your private key.
 
 Beware that if you have more than one private key, your installation needs to select the correct one
-*by default*.
+*by default* (this is step 3 below).
 
 Additionally, you'll need to configure Maven:
 
@@ -78,15 +78,15 @@ Additionally, you should define:
 	* `maven.compiler.release`: 17
 	* `project.build.sourceEncoding`: UTF-8
 	* `project.reporting.outputEncoding`: whatever `project.build.sourceEncoding` is set to
-* The last version of plugins using these properties, if different from the listed values:
-	* `maven-enforcer-plugin.version`: 3.3.0
-	* `maven-compiler-plugin.version`: 3.11.0
-	* `maven-source-plugin.version`: 3.2.1
-	* `maven-javadoc-plugin.version`: 3.5.0
-	* `maven-gpg-plugin.version`: 3.0.1
-	* `maven-install-plugin.version`: 3.1.1
-	* `maven-scm-plugin.version`: 2.0.0
-	* `nexus-staging-maven-plugin`: 1.6.13
+* The version of plugins using these properties, if you want different versions:
+	* `maven-enforcer-plugin.version`
+	* `maven-compiler-plugin.version`
+	* `maven-source-plugin.version`
+	* `maven-javadoc-plugin.version`
+	* `maven-gpg-plugin.version`
+	* `maven-install-plugin.version`
+	* `maven-scm-plugin.version`
+	* `nexus-staging-maven-plugin`
 * If necessary/wanted, update these properties:
 	* `nexusServerId` (defaults to `ossrh`), if your Maven settings use a different server id, as
 	  defined in step 2 of "[Configure your system](#configure-your-system)"
