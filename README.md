@@ -69,7 +69,7 @@ You must:
 3. Update the property `nexusUrl` if it is not https://oss.sonatype.org/ (this is the value for old
    accounts)
 4. Include correct values for the following tags (the defaults are unlikely to be correct):
-   `<version>`, `<inceptionYear>`, `<name>`, `<description>`, `<developers>`, `<organisation>`, `<license>`
+   `<version>`, `<inceptionYear>`, `<name>`, `<description>`, `<developers>`, `<organisation>`, `<licenses>`
 
 Additionally, you should define:
 
