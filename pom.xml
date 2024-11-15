@@ -13,19 +13,22 @@
   ~ implied. See the License for the specific language governing permissions and limitations under the
   ~ License.
   -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd" child.project.url.inherit.append.path="false">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd"
+         child.project.url.inherit.append.path="false">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>net.sf.opk</groupId>
 	<artifactId>opk-parent</artifactId>
-	<version>9</version>
+	<version>10</version>
 	<packaging>pom</packaging>
 
 	<name>${project.artifactId}</name>
 	<description>${project.groupId}:${project.artifactId}</description>
 	<url>${project.organization.url}/${project.artifactId}/</url>
 	<inceptionYear>2011</inceptionYear>
-	<scm child.scm.connection.inherit.append.path="false" child.scm.developerConnection.inherit.append.path="false" child.scm.url.inherit.append.path="false">
+	<scm child.scm.connection.inherit.append.path="false" child.scm.developerConnection.inherit.append.path="false"
+	     child.scm.url.inherit.append.path="false">
 		<url>https://github.com/opwvhk/${project.artifactId}</url>
 		<developerConnection>scm:git:git@github.com:opwvhk/${project.artifactId}.git</developerConnection>
 		<tag>HEAD</tag>
@@ -55,12 +58,12 @@
 	</distributionManagement>
 	<properties>
 		<!-- Build configurations -->
-		<maven.compiler.release>17</maven.compiler.release>
+		<maven.compiler.release>21</maven.compiler.release>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
 		<!-- Plugin versions -->
 		<maven-enforcer-plugin.version>3.5.0</maven-enforcer-plugin.version>
-		<maven-resoures-plugin.version>3.3.1</maven-resoures-plugin.version>
+		<maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
 		<maven-compiler-plugin.version>3.14.0</maven-compiler-plugin.version>
 		<maven-source-plugin.version>3.3.1</maven-source-plugin.version>
 		<maven-surefire-plugin.version>3.5.3</maven-surefire-plugin.version>
@@ -68,6 +71,7 @@
 		<maven-javadoc-plugin.version>3.11.2</maven-javadoc-plugin.version>
 		<maven-gpg-plugin.version>3.2.7</maven-gpg-plugin.version>
 		<maven-install-plugin.version>3.1.4</maven-install-plugin.version>
+		<maven-release-plugin.version>3.1.1</maven-release-plugin.version>
 		<nexus-staging-maven-plugin.version>1.7.0</nexus-staging-maven-plugin.version>
 		<!-- Nexus configuration -->
 		<nexusServerId>ossrh</nexusServerId>
@@ -101,7 +105,7 @@
 										<message>Release versions do not allow snapshot dependencies; they must re reproducible.</message>
 										<onlyWhenRelease>true</onlyWhenRelease>
 									</requireReleaseDeps>
-									<requireUpperBoundDeps />
+									<requireUpperBoundDeps/>
 									<requireFilesExist>
 										<message>An OSS project requires a license</message>
 										<satisfyAny>true</satisfyAny>
@@ -172,7 +176,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-resources-plugin</artifactId>
-					<version>${maven-resoures-plugin.version}</version>
+					<version>${maven-resources-plugin.version}</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -241,7 +245,7 @@
 						To ensure the gpg plugin runs first, we delete the default execution (that always executes first), and recreate it after the gpg plugin.
 						This ensures the new execution runs after the gpg plugin execution.
 
-						Can be verified using: mvn fr.jcgay.maven.plugins:buildplan-maven-plugin:list
+						Can be verified using: mvn org.codehaus.mojo:buildplan-maven-plugin:list
 						-->
 						<execution>
 							<id>default-install</id>
@@ -269,7 +273,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-release-plugin</artifactId>
-					<version>3.1.1</version>
+					<version>${maven-release-plugin.version}</version>
 					<configuration>
 						<scmDevelopmentCommitComment>Next development version</scmDevelopmentCommitComment>
 						<scmReleaseCommitComment>Release @{releaseLabel}</scmReleaseCommitComment>
