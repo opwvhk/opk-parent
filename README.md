@@ -52,8 +52,12 @@ Additionally, you'll need to configure Maven:
 2. Add a `<server>` to your Maven settings with id `maven-central-portal` and the username &
    encrypted password of your Sonatype account token. You can give it a different id, but then
    you'll need to configure your projects with a property `publishingServerId` containing the id.
-3. Have `gpg` configured to select the correct private key by default (this is automatically the
-   case if you have only one), and use an agent to access the private key.
+3. Have `gpg` configured to use the correct private key by default
+    * The correct private is automatically selected if you have only one.
+    * To use the key, the gpg pinentry must use the correct tty (`export GPG_TTY=$(tty)` on
+      Linux/Mac),
+    * Or you should have the password in an environment variable, specified by the Maven property
+      `gpg.passphraseEnvName` (defaults to `MAVEN_GPG_PASSPHRASE`).
 
 Configure your project
 ----------------------
@@ -90,7 +94,7 @@ Additionally, you should define:
 * If necessary/wanted, define/override these properties:
     * `publishingServerId` (`maven-central-portal` unless overridden), if your Maven settings use a
       different server id, as defined in step 2 of "[Configure your system](#configure-your-system)"
-    * `autoPublish` (`true` unless overridden), `waitUntil` (`published` unless overridden), or any
+    * `autoPublish` (`true` unless overridden), `waitUntil` (`validated` unless overridden), or any
       other [publishing plugin configuration option](https://central.sonatype.org/publish/publish-portal-maven/#plugin-configuration-options)
 
 Deploy a release to Maven Central
@@ -115,5 +119,6 @@ Deploy a snapshot to Maven Central
 If you set the property `enforcer.skip` to `true`, you can also deploy `-SNAPSHOT` releases.
 
 Please note:
-* skipping the enforcer for non-snapshot releases will still enforce the requirements, but later (you may need to do a manual cleanup)
+* skipping the enforcer for non-snapshot releases will still enforce the requirements, but later (
+  you may need to do a manual cleanup)
 * snapshot releases are removed after some time (90 days at the time of writing)
