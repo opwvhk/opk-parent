@@ -29,7 +29,7 @@ Set up a Sonatype account
 
 This is a one-time task.
 
-Sonatype has all documentation: https://central.sonatype.org/publish/publish-guide/
+Sonatype has all documentation: https://central.sonatype.org/publish/publish-portal-guide/
 
 Configure your system
 ---------------------
@@ -49,13 +49,11 @@ Additionally, you'll need to configure Maven:
 
 1. Configure [Maven with a master
    password](https://maven.apache.org/guides/mini/guide-encryption.html)
-2. Add a `<server>` to your Maven settings with the value of the property `nexusServerId` as
-   id (`ossrh` by default),
-   and the username & (encrypted) password of your Sonatype account.
+2. Add a `<server>` to your Maven settings with id `maven-central-portal` and the username &
+   encrypted password of your Sonatype account token. You can give it a different id, but then
+   you'll need to configure your projects with a property `publishingServerId` containing the id.
 3. Have `gpg` configured to select the correct private key by default (this is automatically the
-   case if you have only one)
-4. Set up a Maven `<server>` in your settings with id `gpg.passphrase`, defining the (encrypted)
-   passphrase of your private key.
+   case if you have only one), and use an agent to access the private key.
 
 Configure your project
 ----------------------
@@ -65,36 +63,35 @@ This is a one-time task *per project*.
 You must:
 
 1. Have a project with this POM as `<parent>`, and at least its own `<artifactId>`
-2. Include a license file (named `LICENSE.md`, `LICENSE.txt` or `LICENSE`)
-3. Update the property `nexusUrl` if it is not https://oss.sonatype.org/ (this is the value for old
-   accounts)
-4. Include correct values for the following tags (the defaults are unlikely to be correct):
-   `<version>`, `<inceptionYear>`, `<name>`, `<description>`, `<developers>`, `<organisation>`, `<licenses>`
+2. Include a licence file (named `LICENSE.md`, `LICENSE.txt` or `LICENSE`)
+3. Include correct values for the following tags (the defaults are unlikely to be correct):
+   `<version>`, `<inceptionYear>`, `<name>`, `<description>`, `<developers>`, `<organisation>`,
+   `<licenses>`
 
 Additionally, you should define:
 
 * The correct Java version & source file encoding using the following properties, if they are not
   correct:
-	* `maven.compiler.release`: 17
-	* `project.build.sourceEncoding`: UTF-8
-	* `project.reporting.outputEncoding`: whatever `project.build.sourceEncoding` is set to
+    * `maven.compiler.release`: 21
+    * `project.build.sourceEncoding`: UTF-8
+    * `project.reporting.outputEncoding`: whatever `project.build.sourceEncoding` is set to
 * The version of plugins using these properties, if you want different versions:
-	* `maven-enforcer-plugin.version`
-	* `maven-compiler-plugin.version`
-	* `maven-source-plugin.version`
-	* `maven-javadoc-plugin.version`
-	* `maven-gpg-plugin.version`
-	* `maven-install-plugin.version`
-	* `maven-scm-plugin.version`
-	* `nexus-staging-maven-plugin`
-* If necessary/wanted, update these properties:
-	* `nexusServerId` (defaults to `ossrh`), if your Maven settings use a different server id, as
-	  defined in step 2 of "[Configure your system](#configure-your-system)"
-	* `nexusUrl` (defaults to `https://oss.sonatype.org/`): use `https://s01.oss.sonatype.org/` for
-	  newer projects
-	* `nexusAutoReleaseAfterClose` (defaults to `true`), if set to false, you must point your
-      browser to $nexusUrl, inspect the release, and then use 'mvn nexus-staging:release' or
-	  'mvn nexus-staging:drop' afterward to proceed with or cancel the release
+    * `maven-enforcer-plugin.version`
+    * `maven-resources-plugin.version`
+    * `maven-compiler-plugin.version`
+    * `maven-source-plugin.version`
+    * `maven-surefire-plugin.version`
+    * `maven-failsafe-plugin.version`
+    * `maven-javadoc-plugin.version`
+    * `maven-gpg-plugin.version`
+    * `maven-install-plugin.version`
+    * `maven-release-plugin.version`
+    * `central-publishing-maven-plugin.version`
+* If necessary/wanted, define/override these properties:
+    * `publishingServerId` (`maven-central-portal` unless overridden), if your Maven settings use a
+      different server id, as defined in step 2 of "[Configure your system](#configure-your-system)"
+    * `autoPublish` (`true` unless overridden), `waitUntil` (`published` unless overridden), or any
+      other [publishing plugin configuration option](https://central.sonatype.org/publish/publish-portal-maven/#plugin-configuration-options)
 
 Deploy a release to Maven Central
 ---------------------------------
@@ -110,3 +107,13 @@ To release, you'll need to ensure the following:
   good requirements are that your working tree is clean and that you've tagged the current commit
 
 Then, releasing is as simple as running `mvn deploy`
+
+
+Deploy a snapshot to Maven Central
+----------------------------------
+
+If you set the property `enforcer.skip` to `true`, you can also deploy `-SNAPSHOT` releases.
+
+Please note:
+* skipping the enforcer for non-snapshot releases will still enforce the requirements, but later (you may need to do a manual cleanup)
+* snapshot releases are removed after some time (90 days at the time of writing)
