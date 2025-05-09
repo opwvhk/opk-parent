@@ -20,7 +20,7 @@
 
 	<groupId>net.sf.opk</groupId>
 	<artifactId>opk-parent</artifactId>
-	<version>10</version>
+	<version>11</version>
 	<packaging>pom</packaging>
 
 	<name>${project.artifactId}</name>
