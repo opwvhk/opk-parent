@@ -24,6 +24,8 @@ To deploy to Maven Central, this POM requires you to:
 
 These are explained below.
 
+Once deployed, you can find [your deployments in your Sonatype account](https://central.sonatype.com/publishing/deployments)
+
 Set up a Sonatype account
 -------------------------
 
