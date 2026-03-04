@@ -25,7 +25,7 @@
 
 	<name>${project.artifactId}</name>
 	<description>${project.groupId}:${project.artifactId}</description>
-	<url>${project.organization.url}/${project.artifactId}/</url>
+	<url>${project.organization.url}${project.artifactId}/</url>
 	<inceptionYear>2011</inceptionYear>
 	<scm child.scm.connection.inherit.append.path="false" child.scm.developerConnection.inherit.append.path="false"
 	     child.scm.url.inherit.append.path="false">
@@ -162,6 +162,32 @@
 									</requireReleaseVersion>
 								</rules>
 							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>flatten-maven-plugin</artifactId>
+					<version>1.7.3</version>
+					<executions>
+						<execution>
+							<id>flatten</id>
+							<phase>process-resources</phase>
+							<goals>
+								<goal>flatten</goal>
+							</goals>
+							<configuration>
+								<defaultOperation>extended_interpolate</defaultOperation>
+								<flattenMode>oss</flattenMode>
+								<keepCommentsInPom>true</keepCommentsInPom>
+							</configuration>
+						</execution>
+						<execution>
+							<id>flatten.clean</id>
+							<phase>clean</phase>
+							<goals>
+								<goal>clean</goal>
+							</goals>
 						</execution>
 					</executions>
 				</plugin>
