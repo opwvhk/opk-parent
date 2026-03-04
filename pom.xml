@@ -20,7 +20,7 @@
 
 	<groupId>net.sf.opk</groupId>
 	<artifactId>opk-parent</artifactId>
-	<version>14</version>
+	<version>15</version>
 	<packaging>pom</packaging>
 
 	<name>${project.artifactId}</name>
@@ -300,6 +300,10 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-enforcer-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>flatten-maven-plugin</artifactId>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
